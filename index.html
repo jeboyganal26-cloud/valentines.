@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        text-align: center;
+        background: linear-gradient(135deg, #ffccd5, #ffc2d1);
+        overflow: hidden;
+    }
+
+    .page {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        backdrop-filter: blur(6px);
+    }
+
+    .active {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    h1 {
+        color: #000; /* BLACK TEXT */
+    }
+
+    img {
+        width: 80%;
+        max-width: 380px;
+        border-radius: 20px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.3);
+        margin: 20px 0;
+    }
+
+    button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        background: #000;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #333;
+    }
+
+    .message {
+        max-width: 700px;
+        font-size: 18px;
+        line-height: 1.7;
+        color: #000; /* BLACK MESSAGE TEXT */
+        white-space: pre-line;
+        min-height: 200px;
+    }
+
+    /* Floating Hearts */
+    .heart {
+        position: fixed;
+        bottom: -10px;
+        font-size: 20px;
+        animation: floatUp 6s linear infinite;
+        color: rgba(255,255,255,0.7);
+        z-index: 1;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+    
+<!-- Music -->
+<audio autoplay loop controls>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Page 1 -->
+<div class="page active" id="page1">
+    <h1>Happy Valentine’s Day 💖</h1>
+    <img src="photo1.jpg">
+    <button onclick="nextPage(2)">Next ➡</button>
+</div>
+
+<!-- Page 2 -->
+<div class="page" id="page2">
+    <h1>Our Memories 🥰</h1>
+    <img src="photo2.jpg">
+    <button onclick="nextPage(3)">Next ➡</button>
+</div>
+
+<!-- Page 3 -->
+<div class="page" id="page3">
+    <h1>More Beautiful Moments 💕</h1>
+    <img src="photo3.jpg">
+    <button onclick="nextPage(4)">Next ➡</button>
+</div>
+
+<!-- Page 4 -->
+<div class="page" id="page4">
+    <h1>Forever With You ❤️</h1>
+    <img src="photo4.jpg">
+    <div class="message" id="typewriter"></div>
+</div>
+
+<script>
+/* Manual Page Change */
+function nextPage(pageNumber) {
+    let pages = document.querySelectorAll('.page');
+    pages.forEach(page => page.classList.remove('active'));
+    document.getElementById("page" + pageNumber).classList.add("active");
+
+    if(pageNumber === 4){
+        typeWriter();
+    }
+}
+
+/* Floating Hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 300);
+
+/* Typewriter Effect */
+const messageText = `Happy Valentine’s Day, pookieee!
+
+I’m probably the luckiest man on earth to have you as my super duper, extremely pretty, beautiful, gorgeous, stunning cutie na pookieee 😚. I wish we could be the endgame of our story because we still have a lot of chapters to fill, and we’re just starting to create those happy moments together. I hope these happy moments with you will last forever.
+
+I hope you’re doing well and always taking care of yourself. When life feels hard, don’t forget that I’m always here for you — someone you can lean on. I will always support you, whatever path you choose to take. And maybe soon, makikiss at mayayakap na natin ang isa’t isa 🖤.
+
+Love,
+Jeb`;
+
+let i = 0;
+function typeWriter() {
+    if (i < messageText.length) {
+        document.getElementById("typewriter").innerHTML += messageText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 35);
+    }
+}
+</script>
+
+</body>
+</html>
